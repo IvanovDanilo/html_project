@@ -1,116 +1,405 @@
-<!DOCTYPE html> 
-<html lang="en">
+<!DOCTYPE html>
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CatPets</title>
+    <title>MasterZoo - Ваш магазин для домашніх улюбленці</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Стили для заголовков и границ */
-        h1 {
-            font-size: 50px;
-        }
-        h2 {
-            font-size: 70px;
-        }
-        p.solid {
-            border-style: solid;
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        /* Медиа-запрос для экранов меньше 600px */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 30px;
-            }
-            h2 {
-                font-size: 40px;
-            }
-            .solid {
-                border-width: 1px;
-            }
+        /* Верхнее меню */
+        .top-menu {
+            background-color: #203126;
+            color: green;
+            padding: 10px;
+            text-align: center;
         }
 
-        /* Псевдокласс :hover для ссылок */
-        a:hover {
-            color: red;
-            text-decoration: underline;
+        .top-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
         }
 
-        /* Стили для навигации и бургер-меню */
-        nav {
+        .top-menu a:hover {
+            background-color: #26680c;
+            color: white;
+        }
+
+        /* Шапка сайта */
+        .header {
             display: flex;
+            align-items: center;
             justify-content: space-between;
+            padding: 20px;
+            background-color: white;
+        }
+
+        .header-logo {
+            display: flex;
             align-items: center;
         }
-        .burger {
-            font-size: 30px;
-            cursor: pointer;
-            display: none;
+
+        .header-logo img {
+            width: 150px;
         }
-        #menu {
-            list-style-type: none;
+
+        .header-search {
             display: flex;
+            align-items: center;
         }
-        #menu li {
-            margin-right: 20px;
+
+        .header-search input[type="search"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
-        @media (max-width: 600px) {
-            .burger {
-                display: block;
-            }
-            #menu {
-                display: none;
-                flex-direction: column;
-            }
-            #menu li {
-                margin-right: 0;
-            }
+
+        .header-search button[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Основной контент */
+        .content {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        /* Левый и правый баннеры */
+        .banner {
+            width: 300px;
+            padding: 20px;
+            background-color: #6b45aa;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 20px;
+        }
+
+        /* Каталог товаров */
+        .catalog {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .product {
+            width: 150px;
+            text-align: center;
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .product .price {
+            color: green;
+            font-weight: bold;
+        }
+
+        .add-to-cart {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #203126;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            margin: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Авторизационное окно */
+        .auth-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+
+        .auth-section.active {
+            display: block;
+        }
+
+        .auth-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .login-button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px auto;
+            display: block;
+            width: 120px;
+        }
+
+        .login-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Панель керування стилями */
+        .style-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .style-panel label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .style-panel input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .style-panel button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .style-panel button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="burger" onclick="toggleMenu()">&#9776;</div>
-        <ul id="menu">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <!-- Верхнее меню -->
+    <header>
+        <div class="top-menu">
+            <div class="top-menu-container">
+                <a href="#">Маавыаываы MasterZoo</a>
+                <a href="#">Про нас</a>
+                <a href="#">Дисконтна програма</a>
+                <a href="#">Оплата та доставка</a>
+                <a href="#">Обмін та повернення</a>
+                <a href="#">Грумінг-салон</a>
+                <a href="#">Блог</a>
+                <a href="#">Допомога</a>
+                <a href="#">Відгуки про MasterZoo</a>
+            </div>
+        </div>
+    </header>
 
-    <h1 style="color:rgb(5, 168, 100);"><b> CatPets </b></h1>
-    <hr>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="header-logo">
+            <img src="https://cdn-icons-png.flaticon.com/512/672/672675.png" alt="MasterZoo Logo">
+            <h1>MasterZoo</h1>
+        </div>
+        <div class="header-search">
+            <input type="search" placeholder="Пошук товарів...">
+            <button type="submit">Пошук</button>
+        </div>
+    </header>
 
-    <h2> Товар для тварин </h2>
-    <p class="solid">Тут ви знайдете все для тварин и не тільки</p>
-    <hr>
+    <main>
+        <!-- Основной контент -->
+        <section class="content">
+            <!-- Левый баннер -->
+            <aside class="banner">
+                <h2>Кешбек лапкою махає — 10% повертає!</h2>
+                <p>усі в плюсі, коли купуєте українське!</p>
+            </aside>
 
-    <!-- Ненумерований список -->
-    <ul>
-        <li><a href="https://masterzoo.ua/ua/">Перший сайт</a></li>
-        <li><a href="https://pets.ua/ua">Другий сайт</a></li>
-    </ul>
+            <!-- Каталог товаров -->
+            <section class="catalog">
+                <article class="product">
+                    <img src="https://brit-shop.in.ua/image/cache/catalog/product/SPshow/koshki/korm_dlya_koshek/suxoy-korm-dlja-kotov-zhivushix-v-pomeshenii-brit-premium-by-nature-cat-indoor-15-kg-kurica-75569682006845-1400x1400.jpg" alt="Product 1">
+                    <p>Корм для котів Premium</p>
+                    <p class="price">499 грн</p>
+                    <button class="add-to-cart">Додати в кошик</button>
+                </article>
+                <article class="product">
+                    <img src="https://vetap.com.ua/image/cache/catalog/5665874787871524-1000x1000.png" alt="Product 2">
+                    <p>Іграшка для котиків</p>
+                    <p class="price">299 грн</p>
+                    <button class="add-to-cart">Додати в кошик</button>
+                </article>
+                <article class="product">
+                    <img src="https://zooleader.com.ua/image/cache/catalog/products-images/81-pan-kot-ukraina/41614/41614_main-1170x1170.jpg" alt="Product 3">
+                    <p>Лежак для котів</p>
+                    <p class="price">899 грн</p>
+                    <button class="add-to-cart">Додати в кошик</button>
+                </article>
+                <article class="product">
+                    <img src="https://catfeatdog.com/wp-content/uploads/2023/02/with-meat-rice-vegetables-11kg-4820215363280.jpg.webp" alt="Product 4">
+                    <p>Ласощі для котів</p>
+                    <p class="price">199 грн</p>
+                    <button class="add-to-cart">Додати в кошик</button>
+                </article>
+                <article class="product">
+                  <img src="https://brit-shop.in.ua/image/cache/catalog/product/SPshow/koshki/korm_dlya_koshek/suxoy-korm-dlja-kotov-zhivushix-v-pomeshenii-brit-premium-by-nature-cat-indoor-15-kg-kurica-75569682006845-1400x1400.jpg" alt="Product 1">
+                  <p>Корм для котів Premium</p>
+                  <p class="price">600 грн</p>
+                  <button class="add-to-cart">Додати в кошик</button>
+                </article>
+            </section>
+        </section>
+    </main>
 
-    <img src="c:\Users\user\Downloads\Screenshot_2.jpg" alt="shop" width="1500" height="800">
+    <!-- Панель керування стилями -->
+    <div class="style-panel">
+        <label>Фон сторінки</label>
+        <input type="color" id="bgColorPicker">
 
-    <!-- Опис проєкту -->
-    <blockquote>
-        Проєкт спрямований на створення інноваційного рішення для управління енергією в домашніх умовах.
-        Задача — зробити сайт, де будуть прописані всі завдання.
-    </blockquote>
+        <label>Колір тексту</label>
+        <input type="color" id="textColorPicker">
 
-    <!-- Таблиця з інформацією -->
-   
+        <button id="applyStyles">Застосувати</button>
+    </div>
 
-    <!-- JavaScript для бургер-меню -->
-    <script>
-        function toggleMenu() {
-            var menu = document.getElementById('menu');
-            if (menu.style.display === 'block') {
-                menu.style.display = 'none';
-            } else {
-                menu.style.display = 'block';
-            }
-        }
-    </script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Контакти</h3>
+                <ul>
+                    <li><a href="#">Адреса офісу</a></li>
+                    <li><a href="#">Телефон служби підтримки</a></li>
+                    <li><a href="#">Email</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Соціальні мережі</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Додаткова інформація</h3>
+                <ul>
+                    <li><a href="#">Політика конфіденційності</a></li>
+                    <li><a href="#">Умови використання</a></li>
+                    <li><a href="#">Карта сайту</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
